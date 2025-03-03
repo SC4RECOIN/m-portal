@@ -18,7 +18,7 @@ library CAIP2 {
     }
 
     /// @dev Parse a CAIP-2 identifier into its namespace and reference parts.
-    function pase(string memory input) public pure returns (string memory namespace, string memory chainReference) {
+    function parse(string memory input) public pure returns (string memory namespace, string memory chainReference) {
         bytes memory inputBytes = bytes(input);
         uint256 delimiterIndex;
 
