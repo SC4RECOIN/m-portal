@@ -29,6 +29,10 @@ library PeersConfig {
     address internal constant TRANSCEIVER = 0x0763196A091575adF99e2306E5e90E0Be5154841;
     address internal constant WRAPPED_M_TOKEN = 0x437cc33344a0B27A429f795ff6B469C72698B291;
 
+    bytes32 internal constant SOLANA_M_TOKEN = 0x0b86be66bfceb4c1d7e927bcc4d014be0f2863ab9df85fda610851b64dbd0ae5;
+    bytes32 internal constant SOLANA_PORTAL = 0x0b86ec181cd4c5c984e9062b13f2b2de7b9f5b5e68e84349231d6614cdf3f99f;
+    bytes32 internal constant SOLANA_TRANSCEIVER = SOLANA_PORTAL;
+
     function getPeersConfig(uint256 sourceChainId_) internal pure returns (PeerConfig[] memory _portalPeerConfig) {
         // Get EVM peers
         uint256[] memory evmPeers_ = getPeerChains(sourceChainId_);
@@ -100,10 +104,10 @@ library PeersConfig {
         return
             PeerConfig({
                 wormholeChainId: peerChainId_.toWormholeChainId(),
-                mToken: M_TOKEN.toBytes32(),
-                portal: PORTAL.toBytes32(),
-                wrappedMToken: WRAPPED_M_TOKEN.toBytes32(),
-                transceiver: TRANSCEIVER.toBytes32(),
+                mToken: SOLANA_M_TOKEN,
+                portal: SOLANA_PORTAL,
+                wrappedMToken: bytes32(0),
+                transceiver: SOLANA_TRANSCEIVER,
                 isEvm: false,
                 specialRelaying: false,
                 wormholeRelaying: false
