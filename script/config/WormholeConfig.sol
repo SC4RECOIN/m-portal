@@ -3,6 +3,7 @@
 pragma solidity 0.8.26;
 
 import { Chains } from "./Chains.sol";
+import { CAIP2 } from "./CAIP2.sol";
 
 struct WormholeTransceiverConfig {
     uint16 wormholeChainId;
@@ -15,6 +16,8 @@ struct WormholeTransceiverConfig {
 
 /// @dev Wormhole addresses and configuration
 library WormholeConfig {
+    using CAIP2 for string;
+
     /// @dev https://wormhole.com/docs/build/reference/consistency-levels/
     uint8 internal constant INSTANT_CONSISTENCY_LEVEL = 200;
     uint8 internal constant FINALIZED_CONSISTENCY_LEVEL = 1;
@@ -33,6 +36,14 @@ library WormholeConfig {
         if (chainId_ == Chains.OPTIMISM_SEPOLIA) return Chains.WORMHOLE_OPTIMISM_SEPOLIA;
 
         revert Chains.UnsupportedChain(chainId_);
+    }
+
+    /// @dev Wormhole Chain Ids https://wormhole.com/docs/build/reference/chain-ids/
+    function toWormholeChainId(string memory id_) internal pure returns (uint16 wormholeChainId_) {
+        if (id_.equals(Chains.SOLANA)) return Chains.WORMHOLE_SOLANA;
+        if (id_.equals(Chains.SOLANA_DEVNET)) return Chains.WORMHOLE_SOLANA;
+
+        revert Chains.UnsupportedCAIP2(id_);
     }
 
     /// @dev Wormhole Core Bridge https://wormhole.com/docs/build/reference/contract-addresses/#core-contracts
