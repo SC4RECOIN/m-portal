@@ -308,6 +308,19 @@ transfer-prod-arbitrum: RPC_URL=$(ARBITRUM_RPC_URL)
 transfer-prod-arbitrum: transfer-prod
 
 # 
+# Send Merkle Roots
+# 
+
+send-merkle-root: SCRIPT=script/tasks/SendMerkleRoot.s.sol:SendMerkleRoot
+send-merkle-root: task
+
+# Testnet
+
+send-merkle-root-dev: SIGNER_PRIVATE_KEY=$(DEV_PRIVATE_KEY)
+send-merkle-root-dev: RPC_URL=$(SEPOLIA_RPC_URL)
+send-merkle-root-dev: send-merkle-root
+
+# 
 # M-like token transfers
 # 
 
