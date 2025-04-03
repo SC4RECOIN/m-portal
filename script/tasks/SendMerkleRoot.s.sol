@@ -20,7 +20,7 @@ contract SendMerkleRoot is TaskBase {
 
         vm.startBroadcast(signer_);
 
-        IHubPortal(portal_).sendMerkleRoots{ value: deliveryPrice_ }(signer_.toBytes32());
+        IHubPortal(portal_).sendEarnersMerkleRoot{ value: deliveryPrice_ }(signer_.toBytes32());
         console.log("Merkle roots sent to:", destinationChainId_);
 
         vm.stopBroadcast();
